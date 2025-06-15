@@ -83,4 +83,5 @@ npx expo install react-native-appwrite react-native-url-polyfill
 
 7. 
    npx install react-native-paper
-# habit-tracker-
+8. Add the code for the auth screens and the logic behind the switching of the screens and also the client side validation
+9. Then add the AuthProvider hook in the lib folder
