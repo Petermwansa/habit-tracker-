@@ -25,6 +25,7 @@ In the output, you'll find options to open the app in a
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
+
 ## Get a fresh project
 
 When you're ready, run:
@@ -48,3 +49,38 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+
+
+
+
+
+
+
+
+
+## Reset
+I first reset the project to start with a clean template by running 
+
+```bash
+npm run reset-project
+```
+
+## IMPLEMENTATION OF TABS FOR THE NAVIGATION
+
+1. First create a tabs folder liek this: "(tabs)"
+   then move the login and the index screens there
+2. then include a layput file there 
+3. add the icons using this website [1](https://icons.expo.fyi/Index)
+
+4. We now add the datatbase and start with authentication
+   the database used was appwrite with: 
+```bash
+npx expo install react-native-appwrite react-native-url-polyfill
+```
+5. then set up the appwrite configurations
+6. Add the auth.tsx file and use the routeguard component to render the auth.tsx file if the isAuth is not true
+
+7. 
+   npx install react-native-paper
+# habit-tracker-
