@@ -86,3 +86,4 @@ npx expo install react-native-appwrite react-native-url-polyfill
 8. Add the code for the auth screens and the logic behind the switching of the screens and also the client side validation
 9. Then add the AuthProvider hook in the lib folder
 10. Finish handling the authentication an dredirect to the homepage when then auth is successful
+11. Add the the two screens of: add-habit and streaks in the tabs folder
