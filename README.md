@@ -80,10 +80,10 @@ npx expo install react-native-appwrite react-native-url-polyfill
 ```
 5. then set up the appwrite configurations
 6. Add the auth.tsx file and use the routeguard component to render the auth.tsx file if the isAuth is not true
-
 7. 
    npx install react-native-paper
 8. Add the code for the auth screens and the logic behind the switching of the screens and also the client side validation
 9. Then add the AuthProvider hook in the lib folder
 10. Finish handling the authentication an dredirect to the homepage when then auth is successful
 11. Add the the two screens of: add-habit and streaks in the tabs folder
+12. Add the add-habit page and add the functionality of creating a habit and insert it into the db

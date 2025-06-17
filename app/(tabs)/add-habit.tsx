@@ -58,7 +58,7 @@ const AddHabitScreen = () => {
         style={styles.input}
         label="Description"
         mode="outlined"
-        onChangeText={setTitle}
+        onChangeText={setDescription}
       />
       <View style={styles.frequencyContainer}>
         <SegmentedButtons
@@ -75,7 +75,6 @@ const AddHabitScreen = () => {
         style={styles.button}
         disabled={!title || !description}
         onPress={handleSubmit}
-      
       >
         Add Habit
       </Button>
