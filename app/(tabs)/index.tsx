@@ -1,9 +1,15 @@
-import { client, DATABASE_ID, databases, HABITS_COLLECTION_ID, RealtimeResponse } from "@/lib/appwrite";
+import {
+  client,
+  DATABASE_ID,
+  databases,
+  HABITS_COLLECTION_ID,
+  RealtimeResponse,
+} from "@/lib/appwrite";
 import { useAuth } from "@/lib/auth-context";
 import { Habit } from "@/types/database.type";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
-import { StyleSheet, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { Query } from "react-native-appwrite";
 import { Button, Surface, Text } from "react-native-paper";
 
@@ -11,19 +17,39 @@ export default function Index() {
   const { signOut, user } = useAuth();
 
   const [habits, setHabits] = useState<Habit[]>();
-
-
-
   useEffect(() => {
-    fetchhabits();
-    const channel = `databases.${DATABASE_ID}.collections${HABITS_COLLECTION_ID}.documents`;
-    const habitSubscription = client.subscribe(channel,
-      (response: RealtimeResponse ) => {
-        if (response.events.includes("databases.*.collections.*.documents.*.create")) {
-          fetchhabits();
+    if (user) {
+      const channel = `databases.${DATABASE_ID}.collections.${HABITS_COLLECTION_ID}.documents`;
+      const habitSubscription = client.subscribe(
+        channel,
+        (response: RealtimeResponse) => {
+          if (
+            response.events.includes(
+              "databases.*.collections.*.documents.*.create"
+            )
+          ) {
+            fetchhabits();
+          } else if (
+            response.events.includes(
+              "databases.*.collections.*.documents.*.update"
+            )
+          ) {
+            fetchhabits();
+          } else if (
+            response.events.includes(
+              "databases.*.collections.*.documents.*.delete"
+            )
+          ) {
+            fetchhabits();
+          }
         }
-      }
-    )
+      );
+      fetchhabits();
+
+      return () => {
+        habitSubscription();
+      };
+    }
   }, [user]);
 
   const fetchhabits = async () => {
@@ -49,6 +75,7 @@ export default function Index() {
         </Button>
       </View>
 
+      <ScrollView showsVerticalScrollIndicator={false}>
       {habits?.length === 0 ? (
         <View style={styles.emptyState}>
           <Text style={styles.emptyStateText}>
@@ -57,8 +84,8 @@ export default function Index() {
         </View>
       ) : (
         habits?.map((habit, key) => (
-          <Surface style={styles.card} elevation={0}>
-            <View key={key} style={styles.cardContent}>
+          <Surface key={key} style={styles.card} elevation={0}>
+            <View style={styles.cardContent}>
               <Text style={styles.cardTitle}>{habit.title}</Text>
               <Text style={styles.cardDescription}>{habit.description}</Text>
               <View style={styles.cardFooter}>
@@ -84,6 +111,7 @@ export default function Index() {
           </Surface>
         ))
       )}
+      </ScrollView>
     </View>
   );
 }
@@ -92,7 +120,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor: "#f5f5f5"
+    backgroundColor: "#f5f5f5",
   },
   header: {
     flexDirection: "row",
@@ -101,7 +129,7 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   title: {
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   card: {
     marginBottom: 18,
@@ -114,18 +142,18 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   cardContent: {
-    padding: 20
+    padding: 20,
   },
   cardTitle: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 4,
-    color: "#22223b"
+    color: "#22223b",
   },
   cardDescription: {
     fontSize: 15,
     marginBottom: 16,
-    color: "#6c6c80"
+    color: "#6c6c80",
   },
   cardFooter: {
     flexDirection: "row",
@@ -133,28 +161,28 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   streakBadge: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     backgroundColor: "#fff4e0",
     borderRadius: 12,
     paddingHorizontal: 10,
-    paddingVertical: 4 
+    paddingVertical: 4,
   },
   streakText: {
     marginLeft: 6,
     color: "#ff9800",
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 14,
   },
   frequencyBadge: {
     backgroundColor: "#ede7f6",
     borderRadius: 12,
     paddingHorizontal: 12,
-    paddingVertical: 4 
+    paddingVertical: 4,
   },
   frequencyText: {
     color: "#7c4dff",
-    fontWeight: 'bold',
+    fontWeight: "bold",
     fontSize: 14,
   },
   emptyState: {
@@ -163,6 +191,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   emptyStateText: {
-    color: "#666666"
-  }
+    color: "#666666",
+  },
 });

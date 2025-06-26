@@ -66,6 +66,7 @@ I first reset the project to start with a clean template by running
 npm run reset-project
 ```
 
+
 ## IMPLEMENTATION OF TABS FOR THE NAVIGATION
 
 1. First create a tabs folder liek this: "(tabs)"
