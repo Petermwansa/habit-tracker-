@@ -89,3 +89,8 @@ npx expo install react-native-appwrite react-native-url-polyfill
 11. Add the the two screens of: add-habit and streaks in the tabs folder
 12. Add the add-habit page and add the functionality of creating a habit and insert it into the db
 13. "Add the fetching of the habits from the db and also inculde the code in the index.tsx for fetching the data. Also add the type interfaces folder and file"
+
+
+# GESTURES FOR DELETING
+
+impor the react gesture handler using GestureHandlerRootView
