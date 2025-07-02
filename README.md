@@ -93,4 +93,6 @@ npx expo install react-native-appwrite react-native-url-polyfill
 
 # GESTURES FOR DELETING
 
-impor the react gesture handler using GestureHandlerRootView
+import the react gesture handler using GestureHandlerRootView
+
+Make the habits screen functional but a few bugs will need to be solved. I used the gesture handler to implement the swipping and adding to the database. Also added a new collections to store the completed habits with the ids of the users"
