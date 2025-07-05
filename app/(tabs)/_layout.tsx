@@ -1,5 +1,4 @@
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import AntDesign from "@expo/vector-icons/AntDesign";
 import { Tabs } from "expo-router";
 
 export default function TabsLayout() {
@@ -55,19 +54,6 @@ export default function TabsLayout() {
               color={color}
             />
           ),
-        }}
-      />
-      <Tabs.Screen
-        name="login"
-        options={{
-          title: "Home",
-          tabBarIcon: ({ color, focused }) => {
-            return focused ? (
-              <AntDesign name="login" size={24} color="black" />
-            ) : (
-              <AntDesign name="login" size={24} color="black" />
-            );
-          },
         }}
       />
     </Tabs>
